@@ -1,0 +1,5 @@
+name = Custom Test Form Enhance
+description = Enhances the custom test form for the atd dev test
+package = Test
+version = "7.x-1.0"
+core = "7.x"

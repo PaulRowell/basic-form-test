@@ -5,3 +5,46 @@
  *
  * Module to modify a basic form for the atd dev test.
  */
+
+/**
+ * Implements hook_menu().
+ */
+function custom_test_form_enhance_form_custom_test_form_alter(&$form, &$form_state, $form_id) {
+
+  // Add custom form field.
+  $form['email'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email'),
+    '#description' => t('What email can you contact you on?'),
+    '#required' => TRUE,
+  );
+
+  // Add a weight to the submit button to drop it to the end of the form.
+  $form['submit']['#weight'] = 99;
+
+  // Add custom validate handler.
+  $form['#validate'][] = 'custom_test_form_enhance_additional_field_validate';
+
+  // Add custom submit handler.
+  $form['#submit'][] = 'custom_test_form_enhance_additional_field_submit';
+
+}
+
+/**
+ * Custom validate handler for the custom form additional field.
+ */
+function custom_test_form_enhance_additional_field_validate($form, &$form_state) {
+
+  // Verify it's a real email.
+  if (!valid_email_address($form_state['values']['email'])) {
+   form_set_error('email', t('Please enter a valid email address.'));
+   }
+}
+
+
+/**
+ * Custom submit handler for the custom form additional field.
+ */
+function custom_test_form_enhance_additional_field_submit($form, &$form_state) {
+  drupal_set_message(t('We\'ll be sure to contact you at @email', array('@email' => $form_state['values']['email'])));
+}

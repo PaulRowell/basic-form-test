@@ -5,3 +5,20 @@
  *
  * Module to show a search page.
  */
+
+/**
+ * Implements hook_menu().
+ */
+function atd_test_search_page_menu() {
+
+  $items["product-search"] = array(
+    'title' => 'Product search',
+    'description' => 'Product search page',
+    'page arguments' => array('product_search_form'),
+    'page callback' => 'drupal_get_form',
+    'access callback' => TRUE,
+    'file' => 'atd_test_search_page.pages.inc',
+  );
+
+  return $items;
+}

@@ -1,4 +1,4 @@
-name = ADT test search age
+name = ADT test search page
 description = Provides a page with a search interface.
 package = Test
 version = "7.x-1.0"
